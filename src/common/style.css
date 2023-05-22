@@ -1,0 +1,15 @@
+/* rem布局 适配 */
+html {
+  font-size: 20px;
+}
+
+@media screen and (max-width: 750px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+  'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+}

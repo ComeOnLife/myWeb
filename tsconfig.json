@@ -18,7 +18,17 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    // 配置别名
+    "paths": {
+      "@": ["./src"],
+      "@/*": ["./src/*"], // 多加个这个
+      "assets/*": ["./src/assets/*"],
+      "common/*": ["./src/common/*"],
+      "component/*":["./src/component/*"],
+      "pages/*": ["./src/pages/*"],
+      "router/*": ["./src/router/*"],
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
