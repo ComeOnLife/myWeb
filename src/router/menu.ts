@@ -39,5 +39,13 @@ const menuRouters = [
       title: "关于我"
     }
   },
+  {
+    path: "/writeArticle",
+    name: "writeArticle",
+    component: () => import("@/pages/writeArticle/writeArticle.vue"),
+    meta: {
+      title: "写文章"
+    }
+  },
 ]
 export default menuRouters

@@ -1,6 +1,6 @@
 <template>
   <div id="all_articles">
-    <h1 class="title">所有文章</h1>
+    <h1 class="title">{{ route.meta.title }}</h1>
     <div class="content">
       <div class="content_list">
         <div class="header">2020</div>
@@ -30,11 +30,24 @@
           </ul>
         </div>
       </div>
+
+      <div class="content_list">
+        <div class="header">{{ route.query.title }}</div>
+        <MdPreview :editorId="id" :modelValue="route.query.content" />
+      </div>
+
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { useRoute} from "vue-router"
+  const route = useRoute()
+  console.log(route.query.content);
+
+  const id = 'preview-only';
+  
+
   // import {getCurrentInstance} from "vue"
 
   // const markdown = getCurrentInstance()?.appContext.config.globalProperties.markdown
@@ -42,32 +55,33 @@
 </script>
 
 <style scoped lang="scss">
-  #all_articles {
-    margin: 3rem 5rem 0 13rem;
-    .title {
-      margin-bottom: 10px;
+#all_articles {
+  .title {
+    margin-bottom: 10px;
+  }
+
+  .content {
+    .header {
+      font-size: 1.2em;
+      text-indent: 4px;
+      border-radius: 4px;
+      padding: 6px 15px;
+      margin-bottom: 20px;
+      margin-top: 5px;
+      background: #B9D3EE;
+      box-shadow: 0px 5px 5px #9FB6CD;
+      border-left: 6px solid #1874CD;
+      position: relative;
+      color: #333;
     }
-    .content {
-      .header {
-        font-size: 1.2em;
-        text-indent: 4px;
-        border-radius: 4px;
-        padding: 6px 15px;
-        margin-bottom: 20px;
-        margin-top: 5px;
-        background: #B9D3EE;
-        box-shadow: 0px 5px 5px #9FB6CD;
-        border-left: 6px solid #1874CD;
-        position: relative;
-        color: #333;
-      }
-      .content_show {
-        margin: 0 0 1.3em 2.5em;
-        font-size: 0.7rem;
-        a {
-          color: #00688B;
-        }
+
+    .content_show {
+      margin: 0 0 1.3em 2.5em;
+      font-size: 0.7rem;
+
+      a {
+        color: #00688B;
       }
     }
   }
-</style>
+}</style>

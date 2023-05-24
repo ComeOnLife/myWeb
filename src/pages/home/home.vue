@@ -46,7 +46,6 @@
 
 <style scoped lang="scss">
 #home {
-  margin: 3rem 5rem 0 13rem;
   .el-card:hover {
     box-shadow: 0px 0px 10px 3px #c9e1f6;
     transition: all 0.5s ease-in-out;

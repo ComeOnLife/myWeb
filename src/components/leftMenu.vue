@@ -17,13 +17,15 @@
       <div>个人博客</div>
       <hr>
       <div>欢迎来到我的个人博客~</div>
-      <hr>
+      <hr class="hr_none">
       <div class="tag">
         <router-link to="/home">博客主页</router-link>
         <router-link to="/allArticles">所有文章</router-link>
         <router-link to="/tag">标签</router-link>
         <router-link to="/technology">技术支持</router-link>
         <router-link to="/aboutMe">关于我</router-link>
+        <router-link to="/writeArticle">写文章</router-link>
+        <router-link to="/login">登录</router-link>
       </div>
     </div>
   </div>
@@ -39,7 +41,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("../../assets/images/infinity-8116002.jpg") no-repeat;
+  background: url("../assets/images/infinity-8116002.jpg") no-repeat;
   background-size: cover;
   z-index: -1;
 
@@ -56,10 +58,8 @@
 
 //内容
 .content {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  padding-top: 14rem;
   max-width: 31rem;
   text-align: center;
 
@@ -76,7 +76,6 @@
   .description {
     color: #fff;
     letter-spacing: 0.15rem;
-    white-space: nowrap;
     div:nth-of-type(1) {
       margin: 0 0 0.25rem;
       font-size: 1.25rem;
@@ -109,7 +108,10 @@
     hr:nth-of-type(2) {
       width: 5rem;
     }
-    .tag a {
+  }
+}
+@media screen and (min-width: 1100px){
+  .tag a {
       margin-left: 0.5rem;
       font-size: 0.6rem;
       color: #a9a4a4;
@@ -118,6 +120,38 @@
       color: #fff;
       transition: all 0.5s linear;
     }
+}
+
+@media screen and (max-width: 1100px) {
+  .tag {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 40px;
+    background: rgba(51, 51, 51, 0.98);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    white-space: nowrap;
+  }
+  .tag a {
+    font-size: 0.7rem;
+    color: #999;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    line-height: normal;
+    padding: 0.5rem 0;
+  }
+  .tag a:hover {
+    color: #fff;
+    transition: all 0.5s ease;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    padding: 0;
+  }
+  .hr_none {
+    display: none;
   }
 }
 </style>

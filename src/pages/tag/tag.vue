@@ -11,9 +11,19 @@
           </ul>
         </div>
       </div>
+
+      <div class="content_list">
+        <div class="header">后端</div>
+        <div class="content_show">
+          <ul>
+            <li><router-link to="">javaSE基础学习</router-link></li>
+            <li><router-link to="">SSM框架学习</router-link></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</template>
+</template> 
 
 <script setup lang="ts">
 
@@ -21,7 +31,6 @@
 
 <style scoped lang="scss">
   #tag {
-    margin: 3rem 5rem 0 13rem;
     .title {
       margin-bottom: 10px;
     }

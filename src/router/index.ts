@@ -11,6 +11,14 @@ const routes = [
     }
   },
   {
+    path: "/login",
+    name: "login",
+    component: () => import("@/pages/login/login.vue"),
+    meta: {
+      title: "登录页"
+    }
+  },
+  {
     path: "/munu",
     name: "munu",
     component: () => import("@/pages/menu/menu.vue"),
