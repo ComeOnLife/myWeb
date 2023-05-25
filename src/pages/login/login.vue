@@ -29,7 +29,9 @@ import { ref, reactive } from "vue"
 import avatarImg from "@/assets/images/avatar.jpg"
 import { User, Lock } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import { getCurrentInstance } from "vue"
 
+const {appContext: {config: {globalProperties}}} = getCurrentInstance()!
 const ruleFormRef = ref<FormInstance>()
 const formLabelAlign = reactive({
   username: '',
@@ -44,13 +46,33 @@ const rules = reactive<FormRules>({
     { min: 5, message: '密码长度不能低于五位数', trigger: 'blur' },
   ],
 })
+
+//如果已经登录返回home页
+if(JSON.parse(localStorage.getItem("userinfo")!)) {
+  globalProperties.$message.success("已登录")
+  globalProperties.$router.push("/home")
+}
+/**
+ * 
+ * @param formEl 
+ * 发登录请求
+ */
 const toLogin = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  await formEl.validate((valid, fields) => {
+  await formEl.validate(async (valid) => {
     if (valid) {
-      console.log('submit!',valid)
+      console.log(globalProperties);
+      const res = await globalProperties.$post("/login", formLabelAlign)
+      console.log(res);
+      if(res.code == 1) {
+        localStorage.setItem("userinfo", JSON.stringify(res.data))
+        globalProperties.$message.success("登录成功")
+        globalProperties.$router.push("/home")
+      }else {
+        globalProperties.$message.error("登录失败")
+      }
     } else {
-      console.log('error submit!', fields)
+      globalProperties.$message.error("请正确填写用户名和密码")
     }
   })
 }

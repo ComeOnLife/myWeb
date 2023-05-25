@@ -24,15 +24,14 @@
         <router-link to="/tag">标签</router-link>
         <router-link to="/technology">技术支持</router-link>
         <router-link to="/aboutMe">关于我</router-link>
-        <router-link to="/writeArticle">写文章</router-link>
-        <router-link to="/login">登录</router-link>
+        <router-link to="/writeArticle" v-if="userinfo">写文章</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
+  const userinfo:object = JSON.parse(localStorage.getItem("userinfo")!)
 </script>
 
 <style scoped lang="scss">

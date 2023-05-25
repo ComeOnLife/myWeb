@@ -9,10 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/marked": "^5.0.0",
     "@vavt/md-editor-extension": "^3.0.0",
+    "axios": "^1.4.0",
     "element-plus": "^2.3.5",
-    "marked": "^5.0.2",
     "md-editor-v3": "^4.0.1",
     "path": "^0.12.7",
     "sass": "^1.62.1",

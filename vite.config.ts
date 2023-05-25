@@ -15,5 +15,14 @@ export default defineConfig({
       "pages": path.resolve(__dirname, "src/pages"),
       "router": path.resolve(__dirname, "src/router"),
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    }
   }
 })
