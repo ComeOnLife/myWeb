@@ -26,6 +26,18 @@
 </template> 
 
 <script setup lang="ts">
+// import { getCurrentInstance, onBeforeMount} from "vue"
+// import { getWebDataRequest} from "@/hooks"
+
+// const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
+// let webDataList = new Array()
+
+// onBeforeMount(async () => {
+//   webDataList = await getWebDataRequest(globalProperties)
+//   console.log(webDataList);
+// })
+
+
 
 </script>
 

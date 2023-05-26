@@ -7,10 +7,13 @@
           <el-input v-model="formInline.title" placeholder="请输入标题"></el-input>
         </el-form-item>
         <el-form-item label="分类: ">
-          <el-select v-model="formInline.category" placeholder="所属分类">
-            <el-option label="前端" value="qianduan"></el-option>
-            <el-option label="后端" value="houduan"></el-option>
+          <el-select v-model="formInline.categoryId" placeholder="所属分类">
+            <el-option :label="item.category" :value="item.id" v-for="item in categorList.list"
+              :key="item.id"></el-option>
           </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="dialogFormVisible = true">新增分类</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -19,30 +22,66 @@
       <div class="save" @click="save" autofocus>发布</div>
     </div>
   </div>
+
+  <addCategory :dialogFormVisible="dialogFormVisible" @updateDlogState="updateDlogState" @confrmAdd="confrmAdd" />
 </template>
 
 <script setup lang="ts">
-import {ref, reactive} from "vue"
+import { ref, reactive } from "vue"
 import { useRoute, useRouter } from "vue-router"
+import addCategory from "./components/addCategory.vue";
+import { getCurrentInstance } from "vue"
+import { addCategoryRequest, getCategoryRequest, Form, addWebDataRequest, WebData } from "./hooks"
 
+const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
 const route = useRoute()
 const router = useRouter()
-
-const formInline = reactive({ //要填写的
+const dialogFormVisible = ref(false)
+const formInline = reactive<WebData>({ //要填写的
   title: '',
-  category: '',
+  categoryId: '',
   content: ''
 })
-const save = () => {
-  router.push({
-    path: "/allArticles",
-    query: {
-      title: formInline.title,
-      category: formInline.category,
-      content: formInline.content
-    }
-  })
+const categorList = reactive({
+  list: <any>[]
+})
+
+
+/**
+ * 新增保存博客
+ */
+const save = async () => {
+  const save:boolean = await addWebDataRequest(globalProperties, formInline)
+  if(save) {
+      router.push({
+      path: "/allArticles",
+    })
+  }
 }
+
+//修改新增种类弹出框的类型
+const updateDlogState = (state: boolean) => {
+  dialogFormVisible.value = state
+}
+/**
+ * 新增分类
+ * @param form 
+ */
+const confrmAdd = async (form: Form) => {
+  const save: boolean = await addCategoryRequest(globalProperties, form)
+  if (save) {
+    dialogFormVisible.value = false
+    getCategorList()
+  }
+}
+/**
+ * 获取分类
+ */
+const getCategorList = async () => {
+  categorList.list = await getCategoryRequest(globalProperties)
+  console.log(categorList.list);
+}
+getCategorList()
 
 </script>
 
@@ -83,6 +122,7 @@ const save = () => {
       border-radius: 4px;
     }
   }
+
   .md-editor {
     height: 100%;
   }
