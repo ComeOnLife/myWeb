@@ -1,5 +1,5 @@
-import { getWebDataRequest } from "./useDataRequest"
+import { getWebDataAndCategaryRequest } from "./useDataRequest"
 
 export {
-  getWebDataRequest
+  getWebDataAndCategaryRequest
 }

@@ -3,39 +3,17 @@
     <h1 class="title">{{ route.meta.title }}</h1>
     <div class="content">
       <div class="content_list">
-        <div class="header">2020</div>
+        <!-- <div class="header">2020</div> -->
         <div class="content_show">
           <ul>
             <li>2020-07-11 »<router-link to="">博客模板功能介绍</router-link></li>
             <li>2020-07-10 »<router-link to="">博客迭代记录</router-link></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="content_list">
-        <div class="header">2016</div>
-        <div class="content_show">
-          <ul>
             <li>2020-07-11 »<router-link to="">文档支持的Markdown语法</router-link></li>
             <li>2020-07-10 »<router-link to="">Jekyll搭建个人博客</router-link></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="content_list">
-        <div class="header">2015</div>
-        <div class="content_show">
-          <ul>
             <li>2020-07-11 »<router-link to="">HEXO搭建个人博客</router-link></li>
           </ul>
         </div>
       </div>
-
-      <div class="content_list">
-        <div class="header">{{ route.query.title }}</div>
-        <MdPreview :editorId="id" :modelValue="route.query.content" />
-      </div>
-
     </div>
   </div>
 </template>
@@ -43,9 +21,7 @@
 <script setup lang="ts">
   import { useRoute} from "vue-router"
   const route = useRoute()
-  console.log(route.query.content);
 
-  const id = 'preview-only';
   
 
   // import {getCurrentInstance} from "vue"

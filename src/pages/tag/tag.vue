@@ -2,22 +2,13 @@
   <div id="tag">
     <h1 class="title">文章归档</h1>
     <div class="content">
-      <div class="content_list">
-        <div class="header">前端</div>
+      <div class="content_list" v-for="item in webDataList.list" :key="item.id">
+        <div class="header">{{item.category}}</div>
         <div class="content_show">
           <ul>
-            <li><router-link to="">如何学习html</router-link></li>
-            <li><router-link to="">css重要的样式</router-link></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="content_list">
-        <div class="header">后端</div>
-        <div class="content_show">
-          <ul>
-            <li><router-link to="">javaSE基础学习</router-link></li>
-            <li><router-link to="">SSM框架学习</router-link></li>
+            <template v-for="data in item.list">
+              <li><router-link to="" :key="data.id">{{ data.title }}</router-link></li>
+            </template>
           </ul>
         </div>
       </div>
@@ -26,16 +17,18 @@
 </template> 
 
 <script setup lang="ts">
-// import { getCurrentInstance, onBeforeMount} from "vue"
-// import { getWebDataRequest} from "@/hooks"
+import { getCurrentInstance, onBeforeMount, reactive} from "vue"
+import { getWebDataAndCategaryRequest} from "@/hooks"
 
-// const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
-// let webDataList = new Array()
+const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
+let webDataList = reactive({
+  list: new Array()
+})
 
-// onBeforeMount(async () => {
-//   webDataList = await getWebDataRequest(globalProperties)
-//   console.log(webDataList);
-// })
+onBeforeMount(async () => {
+  webDataList.list = await getWebDataAndCategaryRequest(globalProperties)
+  console.log(webDataList);
+})
 
 
 
