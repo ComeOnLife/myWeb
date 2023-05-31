@@ -1,5 +1,7 @@
-import { getWebDataAndCategaryRequest } from "./useDataRequest"
+import { useGetWebDataAndCategaryRequest, useGetWebDataRequest,useDeleteWebDataRequest } from "./useDataRequest"
 
 export {
-  getWebDataAndCategaryRequest
+  useGetWebDataAndCategaryRequest,
+  useGetWebDataRequest,
+  useDeleteWebDataRequest
 }

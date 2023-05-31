@@ -1,47 +1,29 @@
 <template>
   <div id="home">
-    <el-card shadow="always" :body-style="{padding: 0}" v-for="item in bokList" :key="item.id">
+    <el-card shadow="always" :body-style="{padding: 0}" v-for="item in webDataList.list" :key="item.id">
       <div class="title">{{ item.title }}</div>
-      <div class="date_time">{{ item.date_time }}</div>
+      <div class="date_time">{{ dayjs(item.createTime).format("YYYY-MM-DD") }}</div>
       <div class="content">{{ item.content }}</div>
-      <router-link class="show_content" to="">芝麻开门，显示全文！</router-link>
+      <router-link class="show_content" :to="'/content?id=' + item.id">芝麻开门，显示全文！</router-link>
     </el-card>
   </div>
 </template>
 
 <script setup lang="ts">
-  const bokList = [
-    {
-      id:0,
-      title: "博客模板功能介绍",
-      date_time: "2020-07-11",
-      content: "在此之前我有写过一篇如何使用我博客模板的文章 请先看这篇基础集成，这篇文章主要讲的是如何使用和修改我的博客主题，文章内容含以下几点：博客特性 适配电脑、手机、平板等各屏幕 响应式设计 个性化头像 每篇文章自动添加打赏功能 支持Disqus、livere评论系统 支持站点总数访问统计，每篇文章访问统计 支持文章自动生成目录 支持标签分类 支持代码高亮 支持文章H1、H2、H3、H4标题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持"
-    },
-    {
-      id:1,
-      title: "博客模板功能介绍",
-      date_time: "2020-07-11",
-      content: "在此之前我有写过一篇如何使用我博客模板的文章 请先看这篇基础集成，这篇文章主要讲的是如何使用和修改我的博客主题，文章内容含以下几点：博客特性 适配电脑、手机、平板等各屏幕 响应式设计 个性化头像 每篇文章自动添加打赏功能 支持Disqus、livere评论系统 支持站点总数访问统计，每篇文章访问统计 支持文章自动生成目录 支持标签分类 支持代码高亮 支持文章H1、H2、H3、H4标题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持"
-    },
-    {
-      id:2,
-      title: "博客模板功能介绍",
-      date_time: "2020-07-11",
-      content: "在此之前我有写过一篇如何使用我博客模板的文章 请先看这篇基础集成，这篇文章主要讲的是如何使用和修改我的博客主题，文章内容含以下几点：博客特性 适配电脑、手机、平板等各屏幕 响应式设计 个性化头像 每篇文章自动添加打赏功能 支持Disqus、livere评论系统 支持站点总数访问统计，每篇文章访问统计 支持文章自动生成目录 支持标签分类 支持代码高亮 支持文章H1、H2、H3、H4标题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持"
-    },
-    {
-      id:3,
-      title: "博客模板功能介绍",
-      date_time: "2020-07-11",
-      content: "在此之前我有写过一篇如何使用我博客模板的文章 请先看这篇基础集成，这篇文章主要讲的是如何使用和修改我的博客主题，文章内容含以下几点：博客特性 适配电脑、手机、平板等各屏幕 响应式设计 个性化头像 每篇文章自动添加打赏功能 支持Disqus、livere评论系统 支持站点总数访问统计，每篇文章访问统计 支持文章自动生成目录 支持标签分类 支持代码高亮 支持文章H1、H2、H3、H4标题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持"
-    },
-    {
-      id:4,
-      title: "博客模板功能介绍",
-      date_time: "2020-07-11",
-      content: "在此之前我有写过一篇如何使用我博客模板的文章 请先看这篇基础集成，这篇文章主要讲的是如何使用和修改我的博客主题，文章内容含以下几点：博客特性 适配电脑、手机、平板等各屏幕 响应式设计 个性化头像 每篇文章自动添加打赏功能 支持Disqus、livere评论系统 支持站点总数访问统计，每篇文章访问统计 支持文章自动生成目录 支持标签分类 支持代码高亮 支持文章H1、H2、H3、H4标题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持题样式多样化 支持多种三方社交icon展示，能从博客直接跳转到自己的三方社交主页 支持"
-    },
-  ]
+  import {getCurrentInstance, onBeforeMount, reactive} from "vue"
+  import {useGetWebDataRequest} from "@/hooks"
+  import * as dayjs from 'dayjs'
+
+  const globalProperties:any = getCurrentInstance()?.appContext.config.globalProperties
+  const webDataList = reactive<any>({
+    list: new Array()
+  })
+  onBeforeMount(async () => {
+    webDataList.list = await useGetWebDataRequest(globalProperties);
+    webDataList.list.forEach((e:any) => {
+      e.content = e.content.match(/[\u4e00-\u9fa5，。]+/g).join()
+    });
+  })
 </script>
 
 <style scoped lang="scss">

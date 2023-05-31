@@ -1,16 +1,21 @@
 <template>
   <div id="all_articles">
-    <h1 class="title">{{ route.meta.title }}</h1>
+    <h1 class="title">{{ globalProperties.$route.meta.title }}</h1>
     <div class="content">
       <div class="content_list">
         <!-- <div class="header">2020</div> -->
         <div class="content_show">
           <ul>
-            <li>2020-07-11 »<router-link to="">博客模板功能介绍</router-link></li>
-            <li>2020-07-10 »<router-link to="">博客迭代记录</router-link></li>
-            <li>2020-07-11 »<router-link to="">文档支持的Markdown语法</router-link></li>
-            <li>2020-07-10 »<router-link to="">Jekyll搭建个人博客</router-link></li>
-            <li>2020-07-11 »<router-link to="">HEXO搭建个人博客</router-link></li>
+            <template v-for="item in webDataList.list" :key="item.id">
+              <div class="li">
+                <li @click="showContent(item.id)">
+                  {{ dayjs(item.createTime).format("YYYY-MM-DD hh:mm:ss") }} »
+                  <router-link to="">{{ item.title }}</router-link>
+                  <el-button type="danger" :icon="Delete" circle size="small" plain @click.stop="deleteWebData(item.id)" />
+                  <el-button type="primary" :icon="Edit"  circle size="small" plain @click.stop="editWebData(item.id)" />
+                </li>
+              </div>
+            </template>
           </ul>
         </div>
       </div>
@@ -19,15 +24,50 @@
 </template>
 
 <script setup lang="ts">
-  import { useRoute} from "vue-router"
-  const route = useRoute()
+import { getCurrentInstance, onBeforeMount, reactive } from "vue"
+import { useGetWebDataRequest, useDeleteWebDataRequest } from "@/hooks"
+import * as dayjs from 'dayjs'
+import { ElButton } from "element-plus";
+import {Delete, Edit} from '@element-plus/icons-vue'
 
-  
+const globalProperties: any = getCurrentInstance()?.appContext.config.globalProperties
+const webDataList = reactive<any>({
+  list: new Array()
+})
+onBeforeMount(async () => {
+  webDataList.list = await useGetWebDataRequest(globalProperties, undefined, 1, 100);
 
-  // import {getCurrentInstance} from "vue"
-
-  // const markdown = getCurrentInstance()?.appContext.config.globalProperties.markdown
-  // console.log(markdown);
+})
+//跳转显示content
+const showContent = (id: number): void => {
+  globalProperties.$router.push({
+    path: '/content',
+    query: {
+      id
+    }
+  })
+}
+//删除
+const deleteWebData = ((id:number):void => {
+  globalProperties.$confirm("您确定要删除吗?","提示", {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }).then(async () => {
+      await useDeleteWebDataRequest(globalProperties,id)
+      webDataList.list = await useGetWebDataRequest(globalProperties, undefined, 1, 100);
+    })
+})
+//编辑
+const editWebData = ((id: Number):void => {
+  console.log(id);
+  globalProperties.$router.push({
+    path: "/writeArticle",
+    query: {
+      id,
+    }
+  })
+})
 </script>
 
 <style scoped lang="scss">
@@ -58,6 +98,10 @@
       a {
         color: #00688B;
       }
+      .el-button {
+        margin-left: 0.3rem;
+      }
     }
   }
-}</style>
+}
+</style>

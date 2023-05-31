@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElLoading } from 'element-plus'
 
 axios.defaults.timeout = -1
 axios.defaults.baseURL = "/api"
@@ -42,13 +42,45 @@ export function post(url: string, data: object = {}) {
   })
 }
 
+let Loading:any = null
+interface User {
+  username: string,
+  token: string
+}
+
+//请求拦截器
+axios.interceptors.request.use(
+  config => {
+    Loading = ElLoading.service({
+      text: '加载中...',
+      background: 'rgba(0, 0, 0, 0.1)'
+    })
+    //token
+    const user:User = JSON.parse(localStorage.getItem("userinfo")!)
+    if(user?.token.length) {
+      config.headers.token = user.token
+    }
+    return config
+  },
+  err => {
+    return Promise.reject(err)
+  }
+)
+
 //响应拦截器
 axios.interceptors.response.use(
   response => {
+    console.log(response);
+    if(response.data.code == 4003) {
+      ElMessage.error('未登录,无法操作')
+      localStorage.removeItem("userinfo") //失效了
+    }
+    Loading.close()
     return response;
   },
   error => {
     console.log('网络出错日志：', error);
+    Loading.close()
     if (error && error.response) {
 
       switch (error.response.status) {

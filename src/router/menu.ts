@@ -47,5 +47,13 @@ const menuRouters = [
       title: "写文章"
     }
   },
+  {
+    path: "/content",
+    name: "content",
+    component: () => import("@/pages/content/content.vue"),
+    meta: {
+      title: "博客内容"
+    }
+  },
 ]
 export default menuRouters

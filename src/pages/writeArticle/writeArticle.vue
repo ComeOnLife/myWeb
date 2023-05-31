@@ -2,11 +2,11 @@
   <div id="write_article">
     <h1 class="title">{{ route.meta.title }}</h1>
     <div class="header">
-      <el-form :inline="true" :model="formInline">
-        <el-form-item label="标题: ">
+      <el-form :inline="true" :model="formInline" ref="ruleFormRef" :rules="rules">
+        <el-form-item label="标题: " prop="title">
           <el-input v-model="formInline.title" placeholder="请输入标题"></el-input>
         </el-form-item>
-        <el-form-item label="分类: ">
+        <el-form-item label="分类: " prop="categoryId">
           <el-select v-model="formInline.categoryId" placeholder="所属分类">
             <el-option :label="item.category" :value="item.id" v-for="item in categorList.list"
               :key="item.id"></el-option>
@@ -19,7 +19,7 @@
     </div>
     <MdEditor v-model="formInline.content" />
     <div class="handle">
-      <div class="save" @click="save" autofocus>发布</div>
+      <div class="save" @click="save(ruleFormRef)" autofocus>发布</div>
     </div>
   </div>
 
@@ -27,15 +27,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue"
+import { ref, reactive, onBeforeMount } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import addCategory from "./components/addCategory.vue";
 import { getCurrentInstance } from "vue"
 import { addCategoryRequest, getCategoryRequest, Form, addWebDataRequest, WebData } from "./hooks"
+import { useGetWebDataRequest } from '@/hooks'
+import type { FormInstance, FormRules } from 'element-plus'
 
 const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
 const route = useRoute()
 const router = useRouter()
+// id 如果是编辑博客过来的会传id
+const id: any = ref(0)
+id.value = route.query.id
+
 const dialogFormVisible = ref(false)
 const formInline = reactive<WebData>({ //要填写的
   title: '',
@@ -45,18 +51,47 @@ const formInline = reactive<WebData>({ //要填写的
 const categorList = reactive({
   list: <any>[]
 })
+//规则验证
+const ruleFormRef = ref<FormInstance>()
+const rules = reactive<FormRules>({
+  title: [
+    { required: true, message: '请输入文章标题', trigger: 'blur' },
+  ],
+  categoryId: [
+    { required: true, message: '请选择分类', trigger: 'blur' },
+  ],
+})
+
+onBeforeMount(async () => {
+  getCategorList() //获取分类列表
+  //如果是编辑进入的需要获取数据
+  if (id.value) {
+    const res = await useGetWebDataRequest(globalProperties, id.value)
+    console.log(res);
+    formInline.title = res[0].title
+    formInline.categoryId = res[0].categoryId
+    formInline.content = res[0].content
+    formInline.id = id.value
+  }
+
+})
 
 
 /**
  * 新增保存博客
  */
-const save = async () => {
-  const save:boolean = await addWebDataRequest(globalProperties, formInline)
-  if(save) {
-      router.push({
-      path: "/allArticles",
-    })
-  }
+const save = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate(async (valid) => {
+    if (valid) {
+      const save: boolean = await addWebDataRequest(globalProperties, formInline)
+      if (save) {
+        router.push({
+          path: "/allArticles",
+        })
+      }
+    }
+  })
 }
 
 //修改新增种类弹出框的类型
@@ -81,7 +116,6 @@ const getCategorList = async () => {
   categorList.list = await getCategoryRequest(globalProperties)
   console.log(categorList.list);
 }
-getCategorList()
 
 </script>
 

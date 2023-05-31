@@ -1,5 +1,6 @@
 
 export interface WebData {
+  id?: number,
   title: string,
   content: string,
   categoryId: number | string
@@ -10,10 +11,9 @@ export interface WebData {
 export async function addWebDataRequest(globalProperties:any,webData:WebData):Promise<boolean> {
   const res = await globalProperties.$post("/webData", webData)
   if(res.code == 1) {
-    globalProperties.$message("新增成功");
+    globalProperties.$message.success(webData.id ? "修改成功" : "新增成功");
   }else{
-    globalProperties.$error("新增失败");
+    globalProperties.$message.error(webData.id ? "修改失败" : "新增失败");
   }
-  console.log(globalProperties, webData);
   return res.code == 1
 }

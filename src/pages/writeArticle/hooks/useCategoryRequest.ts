@@ -18,7 +18,10 @@ export async function addCategoryRequest(globalProperties:any, form: Form):Promi
   }
  return res.code == 1 
 }
-
+/**
+ * 获取分类
+ * @param globalProperties 
+ */
 export async function getCategoryRequest(globalProperties:any):Promise<any[]> {
   const res = await globalProperties.$get("/category")
   console.log(res);
