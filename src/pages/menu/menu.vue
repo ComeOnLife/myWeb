@@ -1,15 +1,26 @@
 <template>
   <div id="menu">
     <div class="left_menu"><left-menu /></div>
-    <div class="content"><router-view></router-view></div>
+    <div class="content">
+      <el-card shadow="always" class="stick_out"> 
+       <keep-alive>
+        <router-view></router-view>
+       </keep-alive>
+      </el-card>
+      <Ending />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import leftMenu from "../../components/leftMenu.vue";
+import Ending from '../../components/Ending.vue'
 </script>
 
 <style scoped lang="scss">
+.el-card {
+  box-shadow: 0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19);
+}
 @media screen and (min-width: 1100px) {
   #menu {
   display: flex;
@@ -19,11 +30,26 @@ import leftMenu from "../../components/leftMenu.vue";
     height: 100vh;
     position: fixed;
     overflow: hidden;
+    z-index: 100;
   }
   .content {
+    position: relative;
     width: 100%;
-    margin-left: 30%;
-    padding: 3rem 5rem 0 0;
+    height: 100%;
+    margin-left: 16rem;
+    z-index: 99;
+    .stick_out {
+      width: 60vw;
+      min-height: 78vh;
+      // position: relative;
+      margin: 0 auto;
+      margin-top: 10vh;
+      // left: 50%;
+      // margin-left: -30vw;
+      padding: 2rem;
+      box-sizing: border-box;
+      border-radius: 1rem;
+    }
   }
  } 
 }
@@ -39,6 +65,8 @@ import leftMenu from "../../components/leftMenu.vue";
     width: 100%;
     padding: 1.5rem 1rem;
     box-sizing: border-box;
+    min-height: 70vh;
+    // margin-left: 22% !important;
   }
  }
 }

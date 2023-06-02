@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <el-card shadow="always" :body-style="{padding: 0}" v-for="item in webDataList.list" :key="item.id">
+    <el-card shadow="hover" :body-style="{padding: 0}" v-for="item in webDataList.list" :key="item.id">
       <div class="title">{{ item.title }}</div>
       <div class="date_time">{{ dayjs(item.createTime).format("YYYY-MM-DD") }}</div>
       <div class="content">{{ item.content }}</div>
@@ -30,7 +30,8 @@
 #home {
   .el-card:hover {
     box-shadow: 0px 0px 10px 3px #c9e1f6;
-    transition: all 0.5s ease-in-out;
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
   }
   .el-card {
     height: 9rem;

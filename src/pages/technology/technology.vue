@@ -2,17 +2,16 @@
   <div id="technology">
     <h1 class="title">技术支持</h1>
     <div class="foreword">
-      <p>博客源码在上，你的 Star 是我更新的动力，谢谢~</p>
-      <p>遇到问题请先自行排查，可以直接在里面提问，不过回复的可能不及时。</p>
-      <p>目前我已经给很多小伙伴做过单独的技术支持了，现在设置 付费支持功能</p>
+      <p>这个博客是我对前后端所学的一次运用</p>
+      <p>页面使用的是rem布局和媒体查询,对h5和web页面进行了兼容</p>
     </div>
     <div class="content">
       <div class="content_list">
-        <div class="header">付费打赏支持</div>
+        <div class="header">使用的相关技术</div>
         <div class="content_show">
-          <p>如果你付费了，请邮件联系我，把付费的截图和你的QQ号一起发给我, 感谢你的赞助。</p>
-          <p>你向我提问题我也要花时间帮你解答，付费多少看你自己的心意，</p>
-          <p>注:  付款后概不退款，拒绝扯皮，我的博客模板一直都是免费给大家使用。</p>
+          <p>最近把后端的SpringBoot技术学完了,这不得写个博客爽一下,打开我心爱的idea...</p>
+          <p>前端技术主要使用Vite + Vue3 + TypeScript + ElementPlus + md-editor-v3</p>
+          <p>后端技术主要使用SpringBoot + Mysql + Redis</p>
         </div>
       </div>
 
@@ -20,13 +19,16 @@
         <div class="header">我能给你解答的问题有</div>
         <div class="content_show">
           <ul>
-            <li>Hexo 、Jekyll 搭建个人博客遇到的问题技术支持</li>
+            <li>前端vue2、vue3、uniapp、微信小程序等前端相关问题</li>
             <li>域名申请，DNS配置遇到的问题技术支持</li>
-            <li>自建服务器部署个人博客，服务器配置</li>
-            <li>Nginx 反向代理、supervisor 守护进程</li>
+            <li>linux服务器配置</li>
+            <li>Nginx 反向代理</li>
             <li>域名备案、SSL证书配置</li>
           </ul>
         </div>
+
+        <div class="header">支持我</div>
+        <img src="@/assets/images/zhifu.jpg" alt="" style="width: 258px;">
       </div>
     </div>
   </div>

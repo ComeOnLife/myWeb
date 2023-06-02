@@ -61,9 +61,7 @@ const toLogin = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid) => {
     if (valid) {
-      console.log(globalProperties);
       const res = await globalProperties.$post("/login", formLabelAlign)
-      console.log(res);
       if(res.code == 1) {
         localStorage.setItem("userinfo", JSON.stringify(res.data))
         globalProperties.$message.success("登录成功")
@@ -104,7 +102,7 @@ const toLogin = async (formEl: FormInstance | undefined) => {
 .login {
   width: 300px;
   height: 300px;
-  position: absolute;
+  position: fixed;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);

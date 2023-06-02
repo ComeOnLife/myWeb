@@ -68,6 +68,8 @@ const showContent = (id: number): void => {
       font-size: 0.7rem;
 
       a {
+        line-height: 1.2rem;
+        font-size: 0.7rem;
         color: #00688B;
       }
     }

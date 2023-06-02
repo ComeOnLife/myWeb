@@ -1,8 +1,11 @@
 import axios from "axios";
 import { ElMessage, ElLoading } from 'element-plus'
 
+export const baseURL = "/api"
+// export const baseURL = "http://43.138.174.116:8080"
+
 axios.defaults.timeout = -1
-axios.defaults.baseURL = "/api"
+axios.defaults.baseURL = baseURL
 
 /**
  * 封装get方法
@@ -51,10 +54,17 @@ interface User {
 //请求拦截器
 axios.interceptors.request.use(
   config => {
-    Loading = ElLoading.service({
-      text: '加载中...',
-      background: 'rgba(0, 0, 0, 0.1)'
-    })
+    if(config.url == "/login"){
+      Loading = ElLoading.service({
+        text: '加载中...',
+        background: 'rgba(0, 0, 0, .8)'
+      })
+    }else {
+      Loading = ElLoading.service({
+        text: '加载中...',
+        background: 'rgba(0, 0, 0, .1)'
+      })
+    }
     //token
     const user:User = JSON.parse(localStorage.getItem("userinfo")!)
     if(user?.token.length) {

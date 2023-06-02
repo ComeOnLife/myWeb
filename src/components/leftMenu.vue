@@ -13,10 +13,10 @@
     </div>
     <!-- 欢迎欢迎 -->
     <div class="description">
-      <div>莫强</div>
+      <div>MO_QIANG</div>
       <div>个人博客</div>
       <hr>
-      <div>欢迎来到我的个人博客~</div>
+      <div class="welcome">欢迎来到我的个人博客~</div>
       <hr class="hr_none">
       <div class="tag">
         <router-link to="/home">博客主页</router-link>
@@ -79,7 +79,7 @@
       margin: 0 0 0.25rem;
       font-size: 1.25rem;
       font-weight: 600;
-      letter-spacing: 0.3rem;
+      letter-spacing: 0.2rem;
     }
 
     div:nth-of-type(2) {
@@ -122,6 +122,9 @@
 }
 
 @media screen and (max-width: 1100px) {
+  .welcome {
+    margin-bottom: 1rem;
+  }
   .tag {
     position: fixed;
     top: 0;
@@ -133,11 +136,12 @@
     align-items: center;
     justify-content: flex-end;
     white-space: nowrap;
+    z-index: 999;
   }
   .tag a {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: #999;
-    margin-right: 0.5rem;
+    margin-right: 0.4rem;
     text-decoration: none;
     line-height: normal;
     padding: 0.5rem 0;
@@ -151,6 +155,11 @@
   }
   .hr_none {
     display: none;
+  }
+}
+@media screen and (max-width: 500px) {
+  .tag{
+    justify-content: center;
   }
 }
 </style>

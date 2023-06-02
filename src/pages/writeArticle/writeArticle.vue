@@ -17,13 +17,14 @@
         </el-form-item>
       </el-form>
     </div>
-    <MdEditor v-model="formInline.content" />
+    <MdEditor v-model="formInline.content" @onUploadImg="onUploadImg" />
     <div class="handle">
       <div class="save" @click="save(ruleFormRef)" autofocus>发布</div>
     </div>
   </div>
 
   <addCategory :dialogFormVisible="dialogFormVisible" @updateDlogState="updateDlogState" @confrmAdd="confrmAdd" />
+  
 </template>
 
 <script setup lang="ts">
@@ -31,9 +32,10 @@ import { ref, reactive, onBeforeMount } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import addCategory from "./components/addCategory.vue";
 import { getCurrentInstance } from "vue"
-import { addCategoryRequest, getCategoryRequest, Form, addWebDataRequest, WebData } from "./hooks"
+import { addCategoryRequest, getCategoryRequest, Form, addWebDataRequest, WebData, useUpdateImageRequest } from "./hooks"
 import { useGetWebDataRequest } from '@/hooks'
 import type { FormInstance, FormRules } from 'element-plus'
+import {baseURL} from "@/common/axios.ts"
 
 const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
 const route = useRoute()
@@ -117,6 +119,21 @@ const getCategorList = async () => {
   console.log(categorList.list);
 }
 
+const onUploadImg = async (files:Array<File>, callback: (urls: Array<string>) => void) => {
+  console.log(files);
+  const res:Array<any> = await Promise.all(
+    Array.from(files).map((file) => {
+      return new Promise((rev, rej) => {
+        const form = new FormData();
+        form.append('file', file);
+        useUpdateImageRequest(globalProperties, form).then(res => rev(res)).catch(err => rej(err))
+      });
+    })
+  );
+  callback(res.map( i => `${baseURL}/download?name=${i}`))
+    
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -132,13 +149,13 @@ const getCategorList = async () => {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #fff;
+    // background: #fff;
     height: 50px;
-    z-index: -1;
-    border-top: 1px solid #eee;
+    // border-top: 1px solid #eee;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    z-index: 1;
 
     .save {
       margin-right: 10%;
@@ -158,7 +175,8 @@ const getCategorList = async () => {
   }
 
   .md-editor {
-    height: 100%;
+    height: 90%;
   }
+  
 }
 </style>
