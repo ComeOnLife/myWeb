@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onBeforeMount, reactive } from "vue"
+import { getCurrentInstance, reactive, onMounted} from "vue"
 import { useGetWebDataRequest, useDeleteWebDataRequest } from "@/hooks"
-import * as dayjs from 'dayjs'
+import  dayjs from 'dayjs'
 import { ElButton } from "element-plus";
 import {Delete, Edit} from '@element-plus/icons-vue'
 
@@ -34,7 +34,7 @@ const globalProperties: any = getCurrentInstance()?.appContext.config.globalProp
 const webDataList = reactive<any>({
   list: new Array()
 })
-onBeforeMount(async () => {
+onMounted(async () => {
   webDataList.list = await useGetWebDataRequest(globalProperties, undefined, 1, 100);
 
 })

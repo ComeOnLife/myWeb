@@ -1,29 +1,39 @@
 <template>
   <div id="home">
-    <el-card shadow="hover" :body-style="{padding: 0}" v-for="item in webDataList.list" :key="item.id">
+    <template v-for="item in webDataList.list" :key="item.id">
+      <el-card shadow="hover" :body-style="{padding: 0}" @click="toContent(item.id)">
       <div class="title">{{ item.title }}</div>
       <div class="date_time">{{ dayjs(item.createTime).format("YYYY-MM-DD") }}</div>
       <div class="content">{{ item.content }}</div>
       <router-link class="show_content" :to="'/content?id=' + item.id">芝麻开门，显示全文！</router-link>
     </el-card>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-  import {getCurrentInstance, onBeforeMount, reactive} from "vue"
+  import {getCurrentInstance, onMounted, reactive} from "vue"
   import {useGetWebDataRequest} from "@/hooks"
-  import * as dayjs from 'dayjs'
+  import dayjs from 'dayjs'
 
   const globalProperties:any = getCurrentInstance()?.appContext.config.globalProperties
   const webDataList = reactive<any>({
     list: new Array()
   })
-  onBeforeMount(async () => {
+  onMounted(async () => {
     webDataList.list = await useGetWebDataRequest(globalProperties);
     webDataList.list.forEach((e:any) => {
-      e.content = e.content.match(/[\u4e00-\u9fa5，。]+/g).join()
+      e.content = e.content.match(/[\u4e00-\u9fa5a-zA-Z，。]+/g).join()
     });
   })
+  const toContent = (id:number):void => {
+    globalProperties.$router.push({
+      path: '/content',
+      query: {
+        id
+      }
+    })
+  }
 </script>
 
 <style scoped lang="scss">
@@ -37,12 +47,16 @@
     height: 9rem;
     margin-bottom: 1.5rem;
     border-radius: 0.5rem;
+    cursor: pointer;
     .title {
       font-size: 1.5em;
       line-height: 1.3em;
       font-weight: bold;
       color: #333333;
       padding: 0.5rem 0 0.2rem 0.5rem;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     .date_time {
       color: #999;

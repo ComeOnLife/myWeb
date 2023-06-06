@@ -74,7 +74,8 @@ const toUrl = (index:number):void => {
   .tag {
     line-height: 2rem;
     img {
-      margin-left: 1.5rem;
+      margin: 0 0.7rem;
+      cursor: pointer;
     }
   }
   a {

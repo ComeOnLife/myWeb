@@ -28,7 +28,9 @@
       "component/*":["./src/component/*"],
       "pages/*": ["./src/pages/*"],
       "router/*": ["./src/router/*"],
-    }
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

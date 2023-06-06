@@ -2,7 +2,7 @@ import axios from "axios";
 import { ElMessage, ElLoading } from 'element-plus'
 
 export const baseURL = "/api"
-// export const baseURL = "http://43.138.174.116:8080"
+// export const baseURL = "http://43.138.174.116/api"
 
 axios.defaults.timeout = -1
 axios.defaults.baseURL = baseURL

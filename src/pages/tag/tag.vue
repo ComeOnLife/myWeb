@@ -17,7 +17,7 @@
 </template> 
 
 <script setup lang="ts">
-import { getCurrentInstance, onBeforeMount, reactive } from "vue"
+import { getCurrentInstance, onMounted, reactive } from "vue"
 import { useGetWebDataAndCategaryRequest } from "@/hooks"
 
 const { appContext: { config: { globalProperties } } } = getCurrentInstance()!
@@ -25,7 +25,7 @@ let webDataList = reactive({
   list: new Array()
 })
 
-onBeforeMount(async () => {
+onMounted(async () => {
   webDataList.list = await useGetWebDataAndCategaryRequest(globalProperties)
   console.log(webDataList);
 })

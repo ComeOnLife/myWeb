@@ -160,6 +160,9 @@
 @media screen and (max-width: 500px) {
   .tag{
     justify-content: center;
+    a:nth-of-type(1){
+      margin-left: 0.4rem;
+    }
   }
 }
 </style>

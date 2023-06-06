@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, onBeforeMount, reactive } from "vue"
+import { getCurrentInstance, onActivated, reactive } from "vue"
 import { useGetWebDataRequest } from "@/hooks"
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 const globalProperties: any = getCurrentInstance()?.appContext.config.globalProperties
 const scrollElement = document.documentElement;
@@ -25,9 +25,7 @@ let dataContent = reactive<any>({
   content: {}
 })
 
-onBeforeMount(async () => {
-  console.log(globalProperties);
-
+onActivated(async () => {
   dataContent.content = await useGetWebDataRequest(globalProperties, globalProperties.$route.query.id)
   dataContent.content = dataContent.content[0]
   console.log(dataContent);

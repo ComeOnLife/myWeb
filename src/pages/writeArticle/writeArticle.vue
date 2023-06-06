@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onBeforeMount } from "vue"
+import { ref, reactive, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import addCategory from "./components/addCategory.vue";
 import { getCurrentInstance } from "vue"
@@ -42,7 +42,6 @@ const route = useRoute()
 const router = useRouter()
 // id 如果是编辑博客过来的会传id
 const id: any = ref(0)
-id.value = route.query.id
 
 const dialogFormVisible = ref(false)
 const formInline = reactive<WebData>({ //要填写的
@@ -64,8 +63,9 @@ const rules = reactive<FormRules>({
   ],
 })
 
-onBeforeMount(async () => {
+onMounted(async () => {
   getCategorList() //获取分类列表
+  id.value = route.query.id
   //如果是编辑进入的需要获取数据
   if (id.value) {
     const res = await useGetWebDataRequest(globalProperties, id.value)
@@ -73,7 +73,7 @@ onBeforeMount(async () => {
     formInline.title = res[0].title
     formInline.categoryId = res[0].categoryId
     formInline.content = res[0].content
-    formInline.id = id.value
+    formInline.id = res[0].id
   }
 
 })

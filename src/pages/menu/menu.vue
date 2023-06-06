@@ -3,9 +3,11 @@
     <div class="left_menu"><left-menu /></div>
     <div class="content">
       <el-card shadow="always" class="stick_out"> 
-       <keep-alive>
-        <router-view></router-view>
-       </keep-alive>
+       <router-view v-slot="{ Component }">
+        <keep-alive exclude="writeArticle">
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
       </el-card>
       <Ending />
     </div>
@@ -37,15 +39,12 @@ import Ending from '../../components/Ending.vue'
     width: 100%;
     height: 100%;
     margin-left: 16rem;
-    z-index: 99;
+    z-index: 100;
     .stick_out {
       width: 60vw;
       min-height: 78vh;
-      // position: relative;
       margin: 0 auto;
       margin-top: 10vh;
-      // left: 50%;
-      // margin-left: -30vw;
       padding: 2rem;
       box-sizing: border-box;
       border-radius: 1rem;
