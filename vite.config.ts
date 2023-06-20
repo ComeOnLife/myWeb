@@ -20,9 +20,10 @@ export default defineConfig({
     proxy: {
       '/api': {
         // target: 'http://localhost:8081',
-        target: 'http://43.138.174.116:8080',
+        // target: 'http://43.138.174.116:8080',
+        target: 'http://www.moqiang.fun',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        // rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
   }

@@ -8,7 +8,11 @@
       </template>
     </div>
 
-    <div style="color: #878787;">© 2023 Mo Qiang's Blog,Powered By <a href="https://imzbf.github.io/md-editor-v3/en-US/index" target="_blank">Md-Editor-V3</a></div>
+    <div style="color: #878787;text-align: center;">
+      © 2023 Mo Qiang's Blog,Powered By 
+      <a href="https://imzbf.github.io/md-editor-v3/en-US/index" target="_blank">Md-Editor-V3</a>
+      <a href="https://beian.miit.gov.cn" target="_blank" style="color: #878787;font-size: 14px;">&nbsp;&nbsp;&nbsp;湘ICP备2023013556号</a>
+    </div>
   </div>
 </template>
 
