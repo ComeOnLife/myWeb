@@ -7,7 +7,7 @@
   <!-- 登录 -->
   <div class="login">
     <el-avatar :size="70" :src="avatarImg"></el-avatar>
-    <el-form :model="formLabelAlign" size="medium" :rules="rules" ref="ruleFormRef">
+    <el-form :model="formLabelAlign" size="default" :rules="rules" ref="ruleFormRef">
       <el-form-item prop="username">
         <el-input v-model="formLabelAlign.username" placeholder="请输入用户名" :prefix-icon="User">
           <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -28,10 +28,12 @@
 import { ref, reactive } from "vue"
 import avatarImg from "@/assets/images/avatar.jpg"
 import { User, Lock } from '@element-plus/icons-vue'
+import {ElAvatar, ElForm, ElFormItem, ElInput, ElButton} from "element-plus"
 import type { FormInstance, FormRules } from 'element-plus'
 import { getCurrentInstance } from "vue"
 
 const {appContext: {config: {globalProperties}}} = getCurrentInstance()!
+
 const ruleFormRef = ref<FormInstance>()
 const formLabelAlign = reactive({
   username: '',
@@ -57,9 +59,11 @@ if(JSON.parse(localStorage.getItem("userinfo")!)) {
  * @param formEl 
  * 发登录请求
  */
-const toLogin = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return
-  await formEl.validate(async (valid) => {
+const toLogin = (formEl: FormInstance | undefined) => {
+  console.log(formEl);
+  
+  if (!formEl) return;
+   formEl.validate(async (valid) => {
     if (valid) {
       const res = await globalProperties.$post("/login", formLabelAlign)
       if(res.code == 1) {

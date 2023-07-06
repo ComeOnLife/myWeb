@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import {ElCard} from "element-plus"
 import leftMenu from "../../components/leftMenu.vue";
 import Ending from '../../components/Ending.vue'
 </script>
@@ -22,6 +23,9 @@ import Ending from '../../components/Ending.vue'
 <style scoped lang="scss">
 .el-card {
   box-shadow: 0 12px 15px 0 rgba(0,0,0,.24), 0 17px 50px 0 rgba(0,0,0,.19);
+}
+:deep(.beian){ 
+    display: none;
 }
 @media screen and (min-width: 1100px) {
   #menu {

@@ -2,17 +2,18 @@
   <div id="home">
     <template v-for="item in webDataList.list" :key="item.id">
       <el-card shadow="hover" :body-style="{padding: 0}" @click="toContent(item.id)">
-      <div class="title">{{ item.title }}</div>
-      <div class="date_time">{{ dayjs(item.createTime).format("YYYY-MM-DD") }}</div>
-      <div class="content">{{ item.content }}</div>
-      <router-link class="show_content" :to="'/content?id=' + item.id">芝麻开门，显示全文！</router-link>
-    </el-card>
+        <div class="title">{{ item.title }}</div>
+        <div class="date_time">{{ dayjs(item.createTime).format("YYYY-MM-DD") }}</div>
+        <div class="content">{{ item.content }}</div>
+        <router-link class="show_content" :to="'/content?id=' + item.id">芝麻开门，显示全文！</router-link>
+      </el-card>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-  import {getCurrentInstance, onMounted, reactive} from "vue"
+  import {ElCard} from "element-plus"
+  import {getCurrentInstance, onMounted, reactive,onActivated} from "vue"
   import {useGetWebDataRequest} from "@/hooks"
   import dayjs from 'dayjs'
 
@@ -25,6 +26,9 @@
     webDataList.list.forEach((e:any) => {
       e.content = e.content.match(/[\u4e00-\u9fa5a-zA-Z，。]+/g).join()
     });
+  })
+  onActivated(async () => {
+    window.scrollTo(0, 0) //阻止缓存的默认行为 浏览器滚动条的位置会在多个缓存页面中共用
   })
   const toContent = (id:number):void => {
     globalProperties.$router.push({

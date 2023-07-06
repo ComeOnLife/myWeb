@@ -29,6 +29,11 @@
       </div>
     </div>
   </div>
+
+  <!-- 备案 -->
+  <div class="beian">
+    <a href="https://beian.miit.gov.cn" target="_blank" style="color: #c3c0c0;font-size: 14px;">备案号：湘ICP备2023013556号-1</a>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +45,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url("../assets/images/infinity-8116002.jpg") no-repeat;
+  background: url("../assets/images/infinity-8116002.webp") no-repeat;
   background-size: cover;
   z-index: -1;
 
@@ -108,6 +113,14 @@
       width: 5rem;
     }
   }
+}
+//备案
+.beian {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
 }
 @media screen and (min-width: 1100px){
   .tag a {

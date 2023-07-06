@@ -35,6 +35,7 @@ import { getCurrentInstance } from "vue"
 import { addCategoryRequest, getCategoryRequest, Form, addWebDataRequest, WebData, useUpdateImageRequest } from "./hooks"
 import { useGetWebDataRequest } from '@/hooks'
 import type { FormInstance, FormRules } from 'element-plus'
+import {ElForm, ElFormItem, ElInput, ElSelect, ElOption, ElButton} from "element-plus"
 import {baseURL} from "@/common/axios.ts"
 
 const { appContext: { config: { globalProperties } } } = getCurrentInstance()!

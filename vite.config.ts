@@ -1,10 +1,16 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from "path";
+import ElementPlus from 'unplugin-element-plus/vite';
+import viteCompression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    ElementPlus({}),
+    viteCompression()
+  ],
   // 配置别名
   resolve: {
     alias: {
@@ -28,3 +34,4 @@ export default defineConfig({
     }
   }
 })
+//./configure --prefix=/usr/local/nginx --with-http_gzip_static_module

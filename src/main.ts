@@ -6,10 +6,10 @@ import router from "./router"
 
 const Vue = createApp(App)
 
-// element ui plus
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-Vue.use(ElementPlus)
+// element ui plugins
+import {ElMessage,ElMessageBox} from "element-plus"
+Vue.config.globalProperties.$message = ElMessage 
+Vue.config.globalProperties.$confirm = ElMessageBox.confirm
 
 //MdEditor 富文本编辑器
 import { MdEditor, MdPreview, MdCatalog } from 'md-editor-v3';
@@ -23,7 +23,6 @@ Vue.component("MdCatalog", MdCatalog)
 import {get, post} from "./common/axios.ts"
 Vue.config.globalProperties.$get = get;
 Vue.config.globalProperties.$post = post;
-
 
 
 Vue.use(router)

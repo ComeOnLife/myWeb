@@ -18,8 +18,10 @@
 </template>
 
 <script setup lang="ts">
+import {ElDialog, ElForm, ElFormItem, ElInput, ElButton} from "element-plus"
 import { reactive} from 'vue'
 import { getCurrentInstance } from "vue"
+import { Form } from "../hooks"
 
 const {appContext: {config: {globalProperties}}} = getCurrentInstance()!
 
@@ -27,7 +29,7 @@ const props = defineProps<{
   dialogFormVisible: boolean
 }>()
 const emits = defineEmits<{
-  confrmAdd: [form: object]
+  confrmAdd: [form: Form]
 }>()
 
 const form = reactive({
