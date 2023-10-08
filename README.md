@@ -27,5 +27,6 @@ npm run dev
 npm run build
 
 ## item show
-![Snipaste_2023-10-08_11-28-52](https://github.com/ComeOnLife/myWeb/assets/74696972/8029f714-f575-4e7c-8314-194076e06388)
+![pageImage](https://github.com/ComeOnLife/myWeb/assets/74696972/b191fc6f-2037-49a6-89e5-334144df14e6)
+
 
